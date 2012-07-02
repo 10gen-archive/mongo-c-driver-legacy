@@ -402,7 +402,7 @@ MONGO_EXPORT void mongo_init( mongo *conn ) {
     conn->max_bson_size = MONGO_DEFAULT_MAX_BSON_SIZE;
 }
 
-MONGO_EXPORT int mongo_connect( mongo *conn , const char *host, int port ) {
+MONGO_EXPORT int mongo_connect( mongo *conn , const char *host, int port, int option ) {
     mongo_init( conn );
 
     conn->primary = bson_malloc( sizeof( mongo_host_port ) );
@@ -410,7 +410,7 @@ MONGO_EXPORT int mongo_connect( mongo *conn , const char *host, int port ) {
     conn->primary->port = port;
     conn->primary->next = NULL;
 
-    if( mongo_env_socket_connect( conn, host, port ) != MONGO_OK )
+    if( mongo_env_socket_connect( conn, host, port ) != MONGO_OK && option != MONGO_SECONDARY_OK )
         return MONGO_ERROR;
 
     if( mongo_check_is_master( conn ) != MONGO_OK )

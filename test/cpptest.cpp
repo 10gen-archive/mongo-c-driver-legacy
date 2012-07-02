@@ -14,7 +14,7 @@ int main(){
 
     INIT_SOCKETS_FOR_WINDOWS;
 
-    if (mongo_connect( conn, TEST_SERVER, 27017 )){
+    if (mongo_connect( conn, TEST_SERVER, 27017, MONGO_PRIMARY_ONLY )){
         cout << "failed to connect" << endl;
         return 1;
     }

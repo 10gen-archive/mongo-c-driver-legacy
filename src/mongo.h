@@ -100,6 +100,11 @@ enum mongo_cursor_opts {
     MONGO_PARTIAL = ( 1<<7 )          /**< Allow reads even if a shard is down. */
 };
 
+enum mongo_connect_opts {
+    MONGO_PRIMARY_ONLY,
+    MONGO_SECONDARY_OK
+};
+
 enum mongo_operations {
     MONGO_OP_MSG = 1000,
     MONGO_OP_UPDATE = 2001,
@@ -223,7 +228,7 @@ MONGO_EXPORT void mongo_init( mongo *conn );
  * @return MONGO_OK or MONGO_ERROR on failure. On failure, a constant of type
  *   mongo_error_t will be set on the conn->err field.
  */
-MONGO_EXPORT int mongo_connect( mongo *conn , const char *host, int port );
+MONGO_EXPORT int mongo_connect( mongo *conn , const char *host, int port, int option );
 
 /**
  * Set up this connection object for connecting to a replica set.

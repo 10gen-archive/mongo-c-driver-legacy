@@ -36,7 +36,7 @@ int mongo_get_server_version( char *version ) {
     bson_iterator it[1];
     const char *result;
 
-    mongo_connect( conn, TEST_SERVER, 27017 );
+    mongo_connect( conn, TEST_SERVER, 27017, MONGO_SECONDARY_OK );
 
     bson_init( cmd );
     bson_append_int( cmd, "buildinfo", 1 );
